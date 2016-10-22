@@ -17,24 +17,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void onClick(View v) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Context aContext = MainActivity.this;
-                FileCreator createTheFile = new FileCreator();
-                createTheFile.createFile(aContext);
-            }
-        }).start();
+        Context aContext = MainActivity.this;
+        FileCreator createTheFile = new FileCreator();
+        createTheFile.execute(MainActivity.this);
     }
     public void onClick2(View w) {
-
         Context aContext = MainActivity.this;
         File theFile =new File(aContext.getFilesDir(), "numbers.txt");
         ThreadManager aManager = new ThreadManager();
-        ArrayList<String> theLines = aManager.doInBackground(theFile);
-        ArrayAdapter<String> nums = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,theLines);
+        aManager.execute(MainActivity.this);
+   /*     ArrayAdapter<String> nums = new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,theLines);
         ListView aList = (ListView) findViewById(R.id.textView);
-        aList.setAdapter(nums);
+        aList.setAdapter(nums);*/
     }
     public void onClick3(View w) {
         ArrayList<String> empty = new ArrayList<String>();
